@@ -5,11 +5,11 @@ import  time
 from datetime import datetime
 import time as t
 from colorama import init, Fore, Back, Style
-
+global resultado
 dbConnect={
     'host':'lldk499.servidoresdns.net',
     'user':'qadr270',
-    'password':'Calafate1123',
+    'password':'456456456',
     'database':'qadr270',
     
 
@@ -26,7 +26,7 @@ def consultar_ddbb():
     #print(resultado)
     for datos in resultado:
         bd=str(datos[0])+" "+datos[1]+" "+datos[2]+" "+str(datos[3])+"\n"
-        print(datos[0])
+        print(datos[1])
         
 
 def registrar():
@@ -58,14 +58,14 @@ def registrar():
 #Consulta todos los datos del usuario
 def consulta_user(email_usu):
     global resultado
-    #email_usu=input("dime su email: ")
     sql="Select *from usuarios where email=%s"
     cursor.execute(sql,(email_usu,))
     resultado=cursor.fetchone()
     #conexion.commit()
     #cursor.close()
     #print(resultado[1])
-    return resultado[1]
+    print( resultado[3])
+    return resultado
 
 
 #Actualizar nivel para subir un nivel num hace referencia al nuevo nivel al que sube
@@ -154,9 +154,6 @@ def inico_juego():
     else:
         print("Eso no es una respuesta prueba de nuevo")
         empezar=input("¿Iniciar sesión o Resgistrarse? I/R: ")
-
-
-
 
 
 

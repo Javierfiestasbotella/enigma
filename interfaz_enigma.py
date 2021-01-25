@@ -15,7 +15,7 @@ def insertar_usuario():
     bd=pymysql.connect(
         host='lldk499.servidoresdns.net',
         user='qadr270',
-        passwd='Calafate1123',
+        passwd='65465465654',
         db='qadr270'
     )
     #conexion=mysql.connector.connect(**dbConnect)
