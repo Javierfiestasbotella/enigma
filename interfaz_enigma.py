@@ -15,7 +15,7 @@ def insertar_usuario():
     bd=pymysql.connect(
         host='lldk499.servidoresdns.net',
         user='qadr270',
-        passwd='65465465654',
+        passwd='Calafate1123',
         db='qadr270'
     )
     #conexion=mysql.connector.connect(**dbConnect)
@@ -51,29 +51,33 @@ def consulta_user(email_usu):
     #conexion.commit()
     #cursor.close()
     #print(resultado[1])
-    print( resultado[3])
+    #print( resultado[3])
+    nivel=resultado[3]
     return resultado
+    return nivel
+    
 
 #enigmas funcion
 def comprobar_enigma():
     global resultado
     global niveles
     3#n=resultado[3]
-    
-    niveles=Label(pantalla3, text=listaA[0],bg="black",fg="green2",width="400",height="10",font=("calibri",9)).pack()
+    consulta_user(nombreusuario_entry.get())
+    niveles=Label(pantalla3, text=listaA[resultado[3]-1],bg="black",fg="green2",width="400",height="15",font=("calibri",9)).pack()
 
                 
                 
 def respuesta():
-    while solucion!=listaB[0]:
+    while solucion.get()!=listaB[resultado[3]-1]:
         messagebox.showinfo(message="Lo siento, esa no es la respuesta correcta, pruebe de nuevo",title="Aviso")
         sol_entry=Entry(pantalla3, textvariable=solucion)
         sol_entry.pack()
     
     messagebox.showinfo(message="Correcto!!! siguiente nivel: ",title="Aviso")
-    listaA.pop(0)
-    listaB.pop(0)
-    Label(pantalla3, text="").pack()               
+    actualizar_nivel(resultado[3],nombreusuario_entry.get())
+    #listaA.pop(0)
+    #listaB.pop(0)
+    Label(pantalla3, text="").pack()            
     comprobar_enigma()
 #pantalla0
 def fpantalla0():
@@ -127,7 +131,7 @@ def fpantalla1():
     Label(pantalla1).pack()
 
     Label(pantalla1, text="Contraseña").pack()
-    contrasenausuario_entry=Entry(pantalla1,textvariable=contrasenausuario_verify)
+    contrasenausuario_entry=Entry(pantalla1,show="*",textvariable=contrasenausuario_verify)
     contrasenausuario_entry.pack()
     Label(pantalla1).pack()
 
@@ -185,16 +189,16 @@ def fpantalla3():
     res=StringVar()
     solucion=StringVar()
     sol_entry=StringVar()
-    listaA=["Tienes 3 bolsas de caramelos que estan las tres mal\n etiquetadas, en una la etiqueta pone caramelos de fresa\n en otra pone caramelos de naranja y en la última pone mezcla\n de caramelos de naranja y fresa. ¿cuántos caramelos \nmínimo tienes que sacar para saber donde estan\n realmente las etiquetas?: ","En una casa hay tres relojes funcionando.\n El día 1 de enero todos ellos indicaban la hora correctamente,\n pero sólo estaba funcionando bien el reloj del dormitorio;\n el de la cocina se atrasaba un minuto al día y\n el del salón se adelantaba un minuto al día.\n Si los relojes continúan marchando así…\n¿al cabo de cuántos días volverán los tres a marcar\n la hora exacta?:  ","¿Que números hay en la siguiente línea de la secuencia? \n             1\n            1 1\n            2 1\n          1 2 1 1\n        1 1 1 2 2 1\n        3 1 2 2 1 1\n      1 3 1 1 2 2 2 1\n    1 1 1 3 2 1 3 2 1 1\n3 1 1 3 1 2 1 1 1 3 1 2 2 1 \n" ,"Un collar y una lanza se cambian por un escudo.Una lanza se cambia por un collar y un cuchillo.Dos escudos se cambian por tres cuchillos.¿Cuántos collares cuesta una lanza? ","Hemos colocado en el jardín dos velas de distinta altura.\n La más larga mide 28 cm y tarda 7 horas en consumirse completamente,\n mientras que la más corta, que es más gruesa, tarda 11 horas en consumirse.\n Encendemos las dos a la vez cuando empieza la fiesta y al cabo de 3 horas,\n cuando se van los amigos, las apagamos. \nEn ese momento tienen las dos la misma altura. \n¿Cuál era la longitud inicial en centímetros \nde la la vela más corta? "]
+    listaA=["Tienes 3 bolsas de caramelos que estan las tres mal\n etiquetadas, en una la etiqueta pone caramelos de fresa\n en otra pone caramelos de naranja y en la última pone mezcla\n de caramelos de naranja y fresa. ¿cuántos caramelos \nmínimo tienes que sacar para saber donde estan\n realmente las etiquetas?: ","En una casa hay tres relojes funcionando.\n El día 1 de enero todos ellos indicaban la hora correctamente,\n pero sólo estaba funcionando bien el reloj del dormitorio;\n el de la cocina se atrasaba un minuto al día y\n el del salón se adelantaba un minuto al día.\n Si los relojes continúan marchando así…\n¿al cabo de cuántos días volverán los tres a marcar\n la hora exacta?:  ","¿Que números hay en la siguiente línea de la secuencia? \n             1\n            1 1\n            2 1\n          1 2 1 1\n        1 1 1 2 2 1\n        3 1 2 2 1 1\n      1 3 1 1 2 2 2 1\n    1 1 1 3 2 1 3 2 1 1\n3 1 1 3 1 2 1 1 1 3 1 2 2 1 \n" ,"Un collar y una lanza se cambian por un escudo.\nUna lanza se cambia por un collar y un cuchillo.\nDos escudos se cambian por tres cuchillos.¿Cuántos collares cuesta una lanza? ","Hemos colocado en el jardín dos velas de distinta altura.\n La más larga mide 28 cm y tarda 7 horas en consumirse completamente,\n mientras que la más corta, que es más gruesa, tarda 11 horas en consumirse.\n Encendemos las dos a la vez cuando empieza la fiesta y al cabo de 3 horas,\n cuando se van los amigos, las apagamos. \nEn ese momento tienen las dos la misma altura. \n¿Cuál era la longitud inicial en centímetros \nde la la vela más corta? "]
     listaB=["1","1440","13211311123113112211","5","22"]
 
     pantalla3=Toplevel(pantalla1)
-    pantalla3.geometry("420x330")
+    pantalla3.geometry("490x410")
     pantalla3.title("Enigmas")
     pantalla3.iconbitmap("enigmaico.ico")
     pantalla3.config(bg="AntiqueWhite3")
 
-    Label(pantalla3, text="Enigma",bg="black",fg="white",width="350",height="3",font=("calibri",15)).pack()
+    Label(pantalla3, text="Enigma",bg="black",fg="white",width="350",height="2",font=("calibri",15)).pack()
     Label(pantalla3, text="").pack()
 
     boton=Button(pantalla3, text="escribir enigma",bg="gold4",command=lambda:comprobar_enigma()).pack()
