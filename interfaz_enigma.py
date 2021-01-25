@@ -15,7 +15,7 @@ def insertar_usuario():
     bd=pymysql.connect(
         host='lldk499.servidoresdns.net',
         user='qadr270',
-        passwd='Calafate1123',
+        passwd='########',
         db='qadr270'
     )
     #conexion=mysql.connector.connect(**dbConnect)
@@ -42,6 +42,12 @@ def insertar_usuario():
     )
 fcursor=bd.cursor()
 fcursor.execute("SELECT contrasena FROM login WHERE email")'''
+
+#Button0(pantalla1,text="prueba",command=lambda:prueba_user()).pack()
+    
+
+          
+
 
 def consulta_user(email_usu):
     global resultado
@@ -77,7 +83,10 @@ def respuesta():
     actualizar_nivel(resultado[3],nombreusuario_entry.get())
     #listaA.pop(0)
     #listaB.pop(0)
-    Label(pantalla3, text="").pack()            
+    Label(pantalla3, text="").pack() 
+    niveles.grid_remove() 
+    boton3=Button(pantalla3, text="Siguiente enigma",bg="gold4",command=lambda:comprobar_enigma()).pack()
+          
     comprobar_enigma()
 #pantalla0
 def fpantalla0():
@@ -134,9 +143,11 @@ def fpantalla1():
     contrasenausuario_entry=Entry(pantalla1,show="*",textvariable=contrasenausuario_verify)
     contrasenausuario_entry.pack()
     Label(pantalla1).pack()
-
+    
     Button(pantalla1,text="Iniciar Sesión",command=lambda:fpantalla3()).pack()
+       
 
+    
 
 
 #pantalla de registro es pantalla2
@@ -175,11 +186,15 @@ def fpantalla2():
     contrasenausuario_entry.pack()
     Label(pantalla2).pack()
 
-    '''Label(pantalla2, text="Vuelva a escribir la Contraseña").pack()
+    Label(pantalla2, text="Vuelva a escribir la Contraseña").pack()
     contrasenausuario2_entry=Entry(pantalla2,textvariable=contrasenausuario2_verify)
     contrasenausuario2_entry.pack()
-    Label(pantalla2).pack()'''
-    Button(pantalla2,text="Registrarse",bg="gold4",command=lambda:insertar_usuario()).pack()
+    Label(pantalla2).pack()
+    while contrasenausuario_verify.get()!=contrasenausuario2_verify.get():
+        messagebox.showinfo(message="No no coinciden las contraseñas",title="Aviso")
+    else:
+        Button(pantalla2,text="Registrarse",bg="gold4",command=lambda:insertar_usuario()).pack()
+
 
 def fpantalla3():
     global pantalla3
@@ -209,6 +224,9 @@ def fpantalla3():
     sol_entry.pack()
 
     boton2=Button(pantalla3, text="Enviar respuesta",bg="gold4",command=lambda:respuesta()).pack()
+    Label(pantalla3, text="").pack()
+
+    boton4=Button(pantalla3, text="Página principal",bg="gold4").pack()
 
     
 
